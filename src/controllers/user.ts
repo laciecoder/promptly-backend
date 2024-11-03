@@ -36,12 +36,14 @@ export const createUser: RequestHandler = async (
       secure: true,
       signed: true,
       path: "/",
+      sameSite: "none",
     });
     const token = createToken(newUser._id.toString(), newUser.email);
     const expires = new Date();
     expires.setDate(expires.getDate() + 1);
     res.cookie("auth_token", token, {
       path: "/",
+      sameSite: "none",
       secure: true,
       httpOnly: true,
       expires,
@@ -78,12 +80,14 @@ export const loginUser: RequestHandler = async (
       secure: true,
       signed: true,
       path: "/",
+      sameSite: "none",
     });
     const token = createToken(user._id.toString(), user.email);
     const expires = new Date();
     expires.setDate(expires.getDate() + 1);
     res.cookie("auth_token", token, {
       path: "/",
+      sameSite: "none",
       secure: true,
       httpOnly: true,
       expires,
@@ -139,6 +143,7 @@ export const logoutUser: RequestHandler = async (
       signed: true,
       secure: true,
       path: "/",
+      sameSite: "none",
     });
     res.status(200).json({ message: "ok" });
   } catch (error) {
