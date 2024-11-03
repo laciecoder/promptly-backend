@@ -37,7 +37,7 @@ export const createUser: RequestHandler = async (
       signed: true,
       path: "/",
       domain: process.env.DOMAIN,
-      sameSite: "none",
+      // sameSite: "none",
     });
     const token = createToken(newUser._id.toString(), newUser.email);
     const expires = new Date();
@@ -45,7 +45,7 @@ export const createUser: RequestHandler = async (
     res.cookie("auth_token", token, {
       path: "/",
       domain: process.env.DOMAIN,
-      sameSite: "none",
+      // sameSite: "none",
       secure: true,
       httpOnly: true,
       expires,
@@ -79,21 +79,21 @@ export const loginUser: RequestHandler = async (
       res.status(403).send("Incorrect password");
       return;
     }
-    res.clearCookie("auth_token", {
-      httpOnly: true,
-      secure: true,
-      signed: true,
-      path: "/",
-      domain: process.env.DOMAIN,
-      sameSite: "none",
-    });
+    // res.clearCookie("auth_token", {
+    //   httpOnly: true,
+    //   secure: true,
+    //   signed: true,
+    //   path: "/",
+    //   domain: process.env.DOMAIN,
+    //   // sameSite: "none",
+    // });
     const token = createToken(user._id.toString(), user.email);
     const expires = new Date();
     expires.setDate(expires.getDate() + 1);
     res.cookie("auth_token", token, {
       path: "/",
       domain: process.env.DOMAIN,
-      sameSite: "none",
+      // sameSite: "none",
       secure: true,
       httpOnly: true,
       expires,
@@ -155,7 +155,7 @@ export const logoutUser: RequestHandler = async (
       secure: true,
       path: "/",
       domain: process.env.DOMAIN,
-      sameSite: "none",
+      // sameSite: "none",
     });
     res.status(200).json({ message: "ok" });
   } catch (error) {
