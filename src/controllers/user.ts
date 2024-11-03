@@ -33,7 +33,7 @@ export const createUser: RequestHandler = async (
     await newUser.save();
     res.clearCookie("auth_token", {
       httpOnly: true,
-      domain: process.env.DOMAIN,
+      secure: true,
       signed: true,
       path: "/",
     });
@@ -42,7 +42,7 @@ export const createUser: RequestHandler = async (
     expires.setDate(expires.getDate() + 1);
     res.cookie("auth_token", token, {
       path: "/",
-      domain: process.env.DOMAIN,
+      secure: true,
       httpOnly: true,
       expires,
       signed: true,
@@ -75,7 +75,7 @@ export const loginUser: RequestHandler = async (
     }
     res.clearCookie("auth_token", {
       httpOnly: true,
-      domain: process.env.DOMAIN,
+      secure: true,
       signed: true,
       path: "/",
     });
@@ -84,7 +84,7 @@ export const loginUser: RequestHandler = async (
     expires.setDate(expires.getDate() + 1);
     res.cookie("auth_token", token, {
       path: "/",
-      domain: process.env.DOMAIN,
+      secure: true,
       httpOnly: true,
       expires,
       signed: true,
@@ -137,7 +137,7 @@ export const logoutUser: RequestHandler = async (
     res.clearCookie("auth_token", {
       httpOnly: true,
       signed: true,
-      domain: process.env.DOMAIN,
+      secure: true,
       path: "/",
     });
     res.status(200).json({ message: "ok" });
