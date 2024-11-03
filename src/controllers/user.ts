@@ -36,6 +36,7 @@ export const createUser: RequestHandler = async (
       secure: true,
       signed: true,
       path: "/",
+      domain: process.env.DOMAIN,
       sameSite: "none",
     });
     const token = createToken(newUser._id.toString(), newUser.email);
@@ -43,6 +44,7 @@ export const createUser: RequestHandler = async (
     expires.setDate(expires.getDate() + 1);
     res.cookie("auth_token", token, {
       path: "/",
+      domain: process.env.DOMAIN,
       sameSite: "none",
       secure: true,
       httpOnly: true,
@@ -82,6 +84,7 @@ export const loginUser: RequestHandler = async (
       secure: true,
       signed: true,
       path: "/",
+      domain: process.env.DOMAIN,
       sameSite: "none",
     });
     const token = createToken(user._id.toString(), user.email);
@@ -89,20 +92,19 @@ export const loginUser: RequestHandler = async (
     expires.setDate(expires.getDate() + 1);
     res.cookie("auth_token", token, {
       path: "/",
+      domain: process.env.DOMAIN,
       sameSite: "none",
       secure: true,
       httpOnly: true,
       expires,
       signed: true,
     });
-    res
-      .status(200)
-      .json({
-        message: "ok",
-        name: user.name,
-        email: user.email,
-        newToken: req.signedCookies["auth_token"],
-      });
+    res.status(200).json({
+      message: "ok",
+      name: user.name,
+      email: user.email,
+      newToken: req.signedCookies["auth_token"],
+    });
   } catch (error) {
     res.status(400).json({ message: "bad request", error: error.message });
   }
@@ -152,6 +154,7 @@ export const logoutUser: RequestHandler = async (
       signed: true,
       secure: true,
       path: "/",
+      domain: process.env.DOMAIN,
       sameSite: "none",
     });
     res.status(200).json({ message: "ok" });
