@@ -49,9 +49,11 @@ export const createUser: RequestHandler = async (
       expires,
       signed: true,
     });
-    res
-      .status(201)
-      .json({ message: "success", name: newUser.name, email: newUser.email });
+    res.status(201).json({
+      message: "success",
+      name: newUser.name,
+      email: newUser.email,
+    });
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: error.message });
@@ -93,7 +95,14 @@ export const loginUser: RequestHandler = async (
       expires,
       signed: true,
     });
-    res.status(200).json({ message: "ok", name: user.name, email: user.email });
+    res
+      .status(200)
+      .json({
+        message: "ok",
+        name: user.name,
+        email: user.email,
+        newToken: req.signedCookies["auth_token"],
+      });
   } catch (error) {
     res.status(400).json({ message: "bad request", error: error.message });
   }
