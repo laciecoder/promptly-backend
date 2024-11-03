@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently \"tsc --watch\" \"node --watch dist/index.js\"",
-    "build": "node --max-old-space-size=4096 ./node_modules/.bin/tsc",
+    "build": "npx tsc",
     "start": "node --max-old-space-size=4096 ./dist/app.js"
   },
   "keywords": [],
