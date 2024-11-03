@@ -3,9 +3,13 @@
       "target": "es2020",
       "skipLibCheck": true,
       "incremental": true,
+      "moduleResolution": "NodeNext",
+      "module": "NodeNext",
       "tsBuildInfoFile": "./.tsbuildinfo",
       "forceConsistentCasingInFileNames": true,
-      "typeRoots": ["./node_modules/@types"]
+      "typeRoots": ["./node_modules/@types"],
+      "allowSyntheticDefaultImports": true,
+      "outDir": "dist"
     },
     "include": ["src/**/*.ts"],
     "exclude": ["node_modules", "dist"]
